@@ -1,0 +1,50 @@
+name: Deploy to Vercel
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Deployment Mode
+        type: choice
+        options:
+          - production
+          - preview
+        default: production
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+      - uses: actions/cache@v4
+        with:
+          path: ./node_modules/.astro
+          key: ${{ runner.os }}-astro-${{ hashFiles('./bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-astro-
+      - run: bun install --global vercel@latest
+      - run: bun install --frozen-lockfile
+
+      # run on preview
+      - if: (github.event_name == 'pull_request') || (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'preview')
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - if: (github.event_name == 'pull_request') || (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'preview')
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - if: (github.event_name == 'pull_request') || (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'preview')
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+      # run on production
+      - if: (github.event_name != 'pull_request') || (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'production')
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - if: (github.event_name != 'pull_request') || (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'production')
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - if: (github.event_name != 'pull_request') || (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'production')
+        run: vercel deploy --prod --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
