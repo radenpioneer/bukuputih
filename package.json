@@ -10,8 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.5.9",
     "@astrojs/check": "^0.5.10",
+    "@fontsource/martel-sans": "^5.0.12",
+    "@fontsource/source-serif-pro": "^5.0.8",
+    "@picocss/pico": "^2.0.6",
+    "astro": "^4.5.9",
+    "astro-seo": "^0.8.3",
+    "sass": "^1.72.0",
     "typescript": "^5.4.3"
   }
 }

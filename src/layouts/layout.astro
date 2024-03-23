@@ -1,0 +1,43 @@
+---
+import BaseLayout from "./base.astro";
+import { SEO } from 'astro-seo'
+
+import '@fontsource/martel-sans/400.css';
+import '@fontsource/martel-sans/700.css';
+import '@fontsource/source-serif-pro/400.css';
+import '@fontsource/source-serif-pro/700.css';
+import '@fontsource/source-serif-pro/900.css';
+---
+
+<BaseLayout>
+
+    {/* <head /> */}
+    <Fragment slot="head">
+        <slot name="head"/>
+        <SEO 
+            title="Buku Putih"
+        />
+    </Fragment>
+
+    {/* <body /> */}
+    <Fragment>
+        <slot />
+    </Fragment>
+</BaseLayout>
+
+<style lang="scss" is:global>
+	@use "@picocss/pico/scss/pico";
+
+    :root {
+        --heading: 'Source Serif Pro', serif;
+        --body: 'Martel Sans', system-ui, sans-serif;
+    }
+
+    body {
+        font-family: var(--body);
+
+        .heading {
+        font-family: var(--heading);
+    }
+    }
+</style>
