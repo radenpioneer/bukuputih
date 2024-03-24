@@ -45,15 +45,10 @@ const { title, description } = Astro.props
 	@use "@picocss/pico/scss/pico";
 
     :root {
-        --heading: 'Source Serif Pro', serif;
-        --body: 'Martel Sans', system-ui, sans-serif;
-    }
+        --pico-font-family: 'Martel Sans', system-ui, sans-serif;
 
-    body {
-        font-family: var(--body);
-
-        .heading {
-        font-family: var(--heading);
+        :is(h1, h2, h3, h4, h5, h6) {
+        --pico-font-family: 'Source Serif Pro', serif;
     }
     }
 </style>
