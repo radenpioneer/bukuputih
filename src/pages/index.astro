@@ -1,10 +1,9 @@
 ---
 import Layout from "~/layouts/layout.astro"
-import { getCollection } from "astro:content"
 import { getEntry } from "astro:content"
+import List from "~/components/list.astro"
 
 const site = await getEntry('site', 'site')
-const posts = await getCollection('posts')
 ---
 
 <Layout>
@@ -15,13 +14,7 @@ const posts = await getCollection('posts')
 				<p>{site.data.description}</p>
 			</hgroup>
 		</section>
-		<section>
-			<ol>
-				{posts.sort((a, b) => a.data.date.getTime() - b.data.date.getTime()).map(post => (
-					<li><a href={`/artikel/${post.slug}`}>{post.data.title}</a></li>
-				))}
-			</ol>
-		</section>
+		<List />
 	</main>
 </Layout>
 
