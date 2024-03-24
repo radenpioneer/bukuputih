@@ -1,19 +1,19 @@
 ---
-import BaseLayout from "./base.astro";
-import Header from "./header.astro";
-import Footer from "./footer.astro";
+import BaseLayout from './base.astro'
+import Header from './header.astro'
+import Footer from './footer.astro'
 import { SEO } from 'astro-seo'
-import { getEntry } from "astro:content"
+import { getEntry } from 'astro:content'
 
-import '@fontsource/martel-sans/400.css';
-import '@fontsource/martel-sans/700.css';
-import '@fontsource/source-serif-pro/400.css';
-import '@fontsource/source-serif-pro/700.css';
-import '@fontsource/source-serif-pro/900.css';
+import '@fontsource/martel-sans/400.css'
+import '@fontsource/martel-sans/700.css'
+import '@fontsource/source-serif-pro/400.css'
+import '@fontsource/source-serif-pro/700.css'
+import '@fontsource/source-serif-pro/900.css'
 
 interface Props {
-    title?: string
-    description?: string
+  title?: string
+  description?: string
 }
 
 const site = await getEntry('site', 'site')
@@ -21,34 +21,34 @@ const { title, description } = Astro.props
 ---
 
 <BaseLayout>
-    {/* <head /> */}
-    <Fragment slot="head">
-        {/* @ts-ignore */}
-        <SEO 
-            title={title}
-            titleDefault={site.data.title}
-            titleTemplate={`%s \u2014 ${site.data.title}`}
-            description={description || site.data.description}
-        />
-        <slot name="head"/>
-    </Fragment>
+  {/* <head /> */}
+  <Fragment slot="head">
+    {/* @ts-ignore */}
+    <SEO
+      title={title}
+      titleDefault={site.data.title}
+      titleTemplate={`%s \u2014 ${site.data.title}`}
+      description={description || site.data.description}
+    />
+    <slot name="head" />
+  </Fragment>
 
-    {/* <body /> */}
-    <Fragment>
-        <Header />
-        <slot />
-        <Footer />
-    </Fragment>
+  {/* <body /> */}
+  <Fragment>
+    <Header />
+    <slot />
+    <Footer />
+  </Fragment>
 </BaseLayout>
 
 <style lang="scss" is:global>
-	@use "@picocss/pico/scss/pico";
+  @use '@picocss/pico/scss/pico';
 
-    :root {
-        --pico-font-family: 'Martel Sans', system-ui, sans-serif;
+  :root {
+    --pico-font-family: 'Martel Sans', system-ui, sans-serif;
 
-        :is(h1, h2, h3, h4, h5, h6) {
-        --pico-font-family: 'Source Serif Pro', serif;
+    :is(h1, h2, h3, h4, h5, h6) {
+      --pico-font-family: 'Source Serif Pro', serif;
     }
-    }
+  }
 </style>

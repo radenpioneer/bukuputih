@@ -11,5 +11,3 @@ tasks:
       bun install
     command: |
       bun run dev
-
-

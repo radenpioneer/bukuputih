@@ -1,8 +1,8 @@
 ---
-import { getCollection } from "astro:content"
+import { getCollection } from 'astro:content'
 
 interface Props {
-    title?: string
+  title?: string
 }
 
 const posts = await getCollection('posts')
@@ -10,12 +10,18 @@ const { title } = Astro.props
 ---
 
 <section>
-    <article>
+  <article>
     {title && <h2>{title}</h2>}
     <ol>
-        {posts.sort((a, b) => a.data.date.getTime() - b.data.date.getTime()).map(post => (
-            <li><a href={`/artikel/${post.slug}`}>{post.data.title}</a></li>
-        ))}
+      {
+        posts
+          .sort((a, b) => a.data.date.getTime() - b.data.date.getTime())
+          .map((post) => (
+            <li>
+              <a href={`/artikel/${post.slug}`}>{post.data.title}</a>
+            </li>
+          ))
+      }
     </ol>
-</article>
+  </article>
 </section>

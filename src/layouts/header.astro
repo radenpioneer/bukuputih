@@ -1,26 +1,33 @@
 ---
-import { getEntry } from "astro:content"
-import { Image } from "astro:assets"
+import { getEntry } from 'astro:content'
+import { Image } from 'astro:assets'
 
 const site = await getEntry('site', 'site')
 ---
 
 <header>
-<nav>
+  <nav>
     <ul></ul>
-<ul>
-    <li>
+    <ul>
+      <li>
         <a href="/">
-            <Image class="logo" src={site.data.logo} width={75} height={75} alt={site.data.title} loading="eager" />
+          <Image
+            class="logo"
+            src={site.data.logo}
+            width={75}
+            height={75}
+            alt={site.data.title}
+            loading="eager"
+          />
         </a>
-    </li>
-</ul>
-<ul></ul>
-</nav>
+      </li>
+    </ul>
+    <ul></ul>
+  </nav>
 </header>
 
 <style lang="scss">
-    .logo {
-        border-radius: 9999px;
-    }
+  .logo {
+    border-radius: 9999px;
+  }
 </style>
