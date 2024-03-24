@@ -1,0 +1,26 @@
+---
+import { getEntry } from "astro:content"
+import { Image } from "astro:assets"
+
+const site = await getEntry('site', 'site')
+---
+
+<header>
+<nav>
+    <ul></ul>
+<ul>
+    <li>
+        <a href="/">
+            <Image class="logo" src={site.data.logo} width={75} height={75} alt={site.data.title} loading="eager" />
+        </a>
+    </li>
+</ul>
+<ul></ul>
+</nav>
+</header>
+
+<style lang="scss">
+    .logo {
+        border-radius: 9999px;
+    }
+</style>

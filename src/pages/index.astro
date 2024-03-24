@@ -1,10 +1,34 @@
 ---
 import Layout from "~/layouts/layout.astro"
+import { getCollection } from "astro:content"
+import { getEntry } from "astro:content"
+
+const site = await getEntry('site', 'site')
+const posts = await getCollection('posts')
 ---
 
 <Layout>
 	<main class="container">
-		<h1 class="heading">Buku Putih</h1>
-		<p>Hitam dan putih kehidupan...</p>
+		<section>
+				<hgroup>
+					<h1 class="heading">{site.data.title}</h1>
+					<p>{site.data.description}</p>
+				</hgroup>
+			<ol>
+				{posts.sort((a, b) => a.data.date.getTime() - b.data.date.getTime()).map(post => (
+					<li><a href={`/${post.slug}`}>{post.data.title}</a></li>
+				))}
+			</ol>
+		</section>
 	</main>
 </Layout>
+
+<style lang="scss">
+	.container {
+		max-width: 768px;
+	}
+
+	hgroup {
+		text-align: center;
+	}
+</style>

@@ -1,27 +1,43 @@
 ---
 import BaseLayout from "./base.astro";
+import Header from "./header.astro";
+import Footer from "./footer.astro";
 import { SEO } from 'astro-seo'
+import { getEntry } from "astro:content"
 
 import '@fontsource/martel-sans/400.css';
 import '@fontsource/martel-sans/700.css';
 import '@fontsource/source-serif-pro/400.css';
 import '@fontsource/source-serif-pro/700.css';
 import '@fontsource/source-serif-pro/900.css';
+
+interface Props {
+    title?: string
+    description?: string
+}
+
+const site = await getEntry('site', 'site')
+const { title, description } = Astro.props
 ---
 
 <BaseLayout>
-
     {/* <head /> */}
     <Fragment slot="head">
-        <slot name="head"/>
+        {/* @ts-ignore */}
         <SEO 
-            title="Buku Putih"
+            title={title}
+            titleDefault={site.data.title}
+            titleTemplate={`%s \u2014 ${site.data.title}`}
+            description={description || site.data.description}
         />
+        <slot name="head"/>
     </Fragment>
 
     {/* <body /> */}
     <Fragment>
+        <Header />
         <slot />
+        <Footer />
     </Fragment>
 </BaseLayout>
 
