@@ -11,7 +11,7 @@ import '@fontsource/source-serif-pro/400.css'
 import '@fontsource/source-serif-pro/700.css'
 import '@fontsource/source-serif-pro/900.css'
 
-interface Props {
+export interface Props {
   title?: string
   description?: string
 }
@@ -42,7 +42,11 @@ const { title, description } = Astro.props
 </BaseLayout>
 
 <style lang="scss" is:global>
-  @use '@picocss/pico/scss/pico';
+  @use '@picocss/pico/scss/pico' with (
+    $modules: (
+      'components/card': false,
+    )
+  );
 
   :root {
     --pico-font-family: 'Martel Sans', system-ui, sans-serif;
@@ -50,5 +54,9 @@ const { title, description } = Astro.props
     :is(h1, h2, h3, h4, h5, h6) {
       --pico-font-family: 'Source Serif Pro', serif;
     }
+  }
+
+  .container {
+    max-width: 768px;
   }
 </style>

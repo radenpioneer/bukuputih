@@ -1,10 +1,9 @@
 ---
+import PageLayout from '~/layouts/page.astro'
 import { getCollection } from 'astro:content'
-import Layout from '~/layouts/layout.astro'
-import List from '~/components/list.astro'
 
 export const getStaticPaths = async () => {
-  const posts = await getCollection('posts')
+  const posts = await getCollection('posts', ({ data }) => !data.draft)
   return posts.map((post) => {
     return {
       params: {
@@ -21,32 +20,6 @@ const { post } = Astro.props
 const { Content } = await post.render()
 ---
 
-<Layout title={post.data.title} description={post.data.description}>
-  <main class="container">
-    <section>
-      <article>
-        <hgroup class="title">
-          <h1>{post.data.title}</h1>
-          <p><i>{post.data.description}</i></p>
-        </hgroup>
-        <Content />
-      </article>
-    </section>
-    <List title="Artikel Lainnya" />
-  </main>
-</Layout>
-
-<style lang="scss">
-  .title {
-    text-align: center;
-    margin-bottom: 2rem;
-
-    h1 {
-      --pico-font-weight: 900;
-    }
-
-    p {
-      margin-top: 1rem;
-    }
-  }
-</style>
+<PageLayout title={post.data.title} description={post.data.description} isPost>
+  <Content />
+</PageLayout>
