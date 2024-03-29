@@ -12,14 +12,14 @@ export const GET: APIRoute = ({ url }: APIContext) => {
   const MartelSansNormal = fs.readFileSync(
     path.resolve(
       process.cwd(),
-      'node_modules/@fontsource/martel-sans/files/martel-sans-latin-700-normal.woff'
+      './public/fonts/martel-sans-latin-700-normal.ttf'
     )
   )
 
   const SourceSerifProBold = fs.readFileSync(
     path.resolve(
       process.cwd(),
-      'node_modules/@fontsource/source-serif-pro/files/source-serif-pro-latin-900-normal.woff'
+      './public/fonts/source-serif-pro-latin-900-normal.ttf'
     )
   )
 

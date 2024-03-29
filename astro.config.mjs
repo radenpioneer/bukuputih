@@ -11,8 +11,8 @@ export default defineConfig({
   output: 'hybrid',
   adapter: vercel({
     includeFiles: [
-      './node_modules/@fontsource/martel-sans/files/martel-sans-latin-700-normal.woff',
-      './node_modules/@fontsource/source-serif-pro/files/source-serif-pro-latin-900-normal.woff',
+      './public/fonts/martel-sans-latin-700-normal.ttf',
+      './public/fonts/source-serif-pro-latin-900-normal.ttf',
     ],
   }),
 })
