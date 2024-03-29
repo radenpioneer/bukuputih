@@ -1,27 +1,22 @@
 import type { APIContext, APIRoute } from 'astro'
 import { ImageResponse } from '@vercel/og'
 import { html } from 'satori-html'
-import fs from 'node:fs'
-import path from 'node:path'
 
-export const GET: APIRoute = ({ url }: APIContext) => {
+export const GET: APIRoute = async ({ url }: APIContext) => {
   const searchParams = new URLSearchParams(url.searchParams)
   const title = searchParams.get('title')
   const subtitle = searchParams.get('subtitle')
 
-  const MartelSansNormal = fs.readFileSync(
-    path.resolve(
-      process.cwd(),
-      './public/fonts/martel-sans-latin-700-normal.ttf'
-    )
-  )
+  const MartelSansNormal = await fetch(
+    new URL('/public/fonts/martel-sans-latin-700-normal.ttf', import.meta.url)
+  ).then((res) => res.arrayBuffer())
 
-  const SourceSerifProBold = fs.readFileSync(
-    path.resolve(
-      process.cwd(),
-      './public/fonts/source-serif-pro-latin-900-normal.ttf'
+  const SourceSerifProBold = await fetch(
+    new URL(
+      '/public/fonts/source-serif-pro-latin-900-normal.ttf',
+      import.meta.url
     )
-  )
+  ).then((res) => res.arrayBuffer())
 
   const markup = html`
     <div
@@ -50,12 +45,12 @@ export const GET: APIRoute = ({ url }: APIContext) => {
     fonts: [
       {
         name: 'Martel Sans',
-        data: MartelSansNormal.buffer,
+        data: MartelSansNormal,
         style: 'normal',
       },
       {
         name: 'Source Serif Pro',
-        data: SourceSerifProBold.buffer,
+        data: SourceSerifProBold,
         style: 'normal',
       },
     ],
