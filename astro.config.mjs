@@ -9,5 +9,10 @@ export default defineConfig({
   site: 'https://bukuputih.sngr.my.id',
   integrations: [react(), markdoc(), keystatic()],
   output: 'hybrid',
-  adapter: vercel(),
+  adapter: vercel({
+    includeFiles: [
+      './node_modules/@fontsource/martel-sans/files/martel-sans-latin-700-normal.woff',
+      './node_modules/@fontsource/source-serif-pro/files/source-serif-pro-latin-900-normal.woff',
+    ],
+  }),
 })
