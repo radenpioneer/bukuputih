@@ -1,16 +1,25 @@
 ---
+import Layout from '~/layouts/layout.astro'
+import { getEntry } from 'astro:content'
+import List from '~/components/list.astro'
 
+const site = await getEntry('site', 'site')
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <main class="container">
+    <section>
+      <hgroup class="title">
+        <h1>{site.data.title}</h1>
+        <p>{site.data.description}</p>
+      </hgroup>
+    </section>
+    <List />
+  </main>
+</Layout>
+
+<style lang="scss">
+  .title {
+    text-align: center;
+  }
+</style>
