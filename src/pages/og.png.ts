@@ -8,12 +8,12 @@ export const GET: APIRoute = async ({ url }: APIContext) => {
   const subtitle = searchParams.get('subtitle')
 
   const MartelSansNormal = await fetch(
-    new URL('/public/fonts/martel-sans-latin-700-normal.ttf', import.meta.url)
+    new URL('../../public/fonts/martel-sans-latin-700-normal.ttf', import.meta.url)
   ).then((res) => res.arrayBuffer())
 
   const SourceSerifProBold = await fetch(
     new URL(
-      '/public/fonts/source-serif-pro-latin-900-normal.ttf',
+      '../../public/fonts/source-serif-pro-latin-900-normal.ttf',
       import.meta.url
     )
   ).then((res) => res.arrayBuffer())
