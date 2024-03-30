@@ -3,6 +3,10 @@ dist/
 # generated types
 .astro/
 
+# content collections
+src/content/*
+!src/content/config.ts
+
 # dependencies
 node_modules/
 
@@ -20,3 +24,6 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 .vercel
+
+# pnpm lockfile
+pnpm-lock.yaml

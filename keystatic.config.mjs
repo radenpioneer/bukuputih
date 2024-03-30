@@ -23,6 +23,10 @@ export default config({
           label: 'Published Date',
           defaultValue: { kind: 'today' },
         }),
+        category: fields.relationship({
+          label: 'Category',
+          collection: 'categories',
+        }),
         image: fields.image({
           label: 'Featured Image',
           directory: 'src/assets/posts',
@@ -47,6 +51,16 @@ export default config({
             publicPath: '~/assets/posts',
           },
         }),
+      },
+    }),
+    categories: collection({
+      label: 'Category',
+      slugField: 'title',
+      path: 'src/content/categories/*',
+      format: 'json',
+      schema: {
+        title: fields.slug({ name: { label: 'Title' } }),
+        description: fields.text({ label: 'Description', multiline: true }),
       },
     }),
   },
